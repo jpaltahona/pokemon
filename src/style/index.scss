@@ -10,6 +10,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #000000;
 
     .search-container{
         margin-right: 12em;
@@ -42,12 +43,15 @@
         padding: 1em;
         box-sizing: border-box;
         box-shadow: 2px 7px 14px -7px #00000073;
+        overflow: auto;
     }
     .conten-info{
         float: left;
         width: 80%;
+        height: 100vh;
         padding: 1em;
         box-sizing: border-box;
+        overflow: auto;
     }
 }
 .list-types{
@@ -61,10 +65,12 @@
     }
 }
 .card{
-    width: 350px;
+    width: 314px;
     height: 150px;
     background-color: #bbe7f0;
     box-sizing: border-box;
     padding: 16px;
     border-radius: 16px;
+    float: left;
+    margin: 8px;
 }

@@ -1,19 +1,31 @@
 import React, { useEffect, useState } from 'react';
-import {typePokemonsApi} from '../../Api/typePokemon';
+import {typePokemonsApi, selecTypesPokemon} from '../../Api/typePokemon';
 import { connect } from 'react-redux';
-import { TypeActionPokemon } from '../../Redux/Actions/typePokemon.reducer';
+import { TypeActionPokemon } from '../../Redux/Actions/typePokemon.action';
+
 
 function TypesPokemon(props) {
 
+    const [ selection, SetSelection ] = useState([]);
+
     useEffect( () => {
-        async function getData(){
-            const data = await  typePokemonsApi();
-            await props.TypeActionPokemon(data);
-        }
-        getData();
+      
+            typePokemonsApi()
+            .then( info => {
+                props.TypeActionPokemon(info)
+            })
+
     }, []);
 
-    console.log(props);
+   
+    function hanbleChange(e){
+        let arraySelection = selection;
+        arraySelection.push(e.target.value);
+
+        SetSelection(arraySelection);
+        selecTypesPokemon(arraySelection);
+    }
+
     return (
         <div>
             { Object.keys(props.typePokemonReducer).length >= 1 ?
@@ -21,9 +33,12 @@ function TypesPokemon(props) {
                 {
                      props.typePokemonReducer.results.map( i => {
                         return(
-                             <li>
+                             <li  key={i.url}>
                                  <label>
-                                    <input type="checkbox" id="cbox1" value={i.url} /> { i.name }
+                                    <input type="checkbox" id="cbox1" value={i.url} 
+                                        onChange={hanbleChange}
+                                    /> 
+                                    { i.name }
                                 </label>
                             </li>
                         )
