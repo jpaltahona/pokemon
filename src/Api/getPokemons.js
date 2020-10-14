@@ -1,24 +1,21 @@
 
 export function fetchPokemonData(pokemon){
-    let url = pokemon.url;
-    fetch(url)
-    .then(response => response.json())
-    .then(function(pokeData){
-        listPokemons(pokeData)
-    })
-}
-export async function getPokemons() {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=10')
-    .then(response => response.json())
-    .then(function(allpokemon){
-        allpokemon.results.forEach(function(pokemon){
-            fetchPokemonData(pokemon);
-        })
+    return new Promise( (resolve, reject) => {
+        let url = pokemon.url;
+        fetch(url)
+        .then(response => response.json())
+        .then((pokeData) => resolve(pokeData))
+        .catch(err => reject(null))
     })
 };
 
+export async function getPokemons() {
 
-export async function listPokemons(data){
-console.log(data)
-    return data
-}
+    return new Promise( ( resolve, reject ) => {
+        fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
+        .then(response => response.json())
+        .then( data => resolve(data) )
+        .catch( error => reject(null))
+    } )
+
+};
