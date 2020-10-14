@@ -10,56 +10,90 @@ import Card from  './card';
 import ModalPokemon from './modal';
 
 function Content(props) {
-    const [listPokemon, setListPokemon] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-
-    async function getData(){
-        getPokemons().then( data => {
+    const [next, setNext] = useState("");
+    async function getData(data){
+        getPokemons( data? data : '' ).then( data => {
+            setNext(data.next);
+            localStorage.setItem('nextPage', data.next)
             data.results.map( pokemon => {
                 let listPoke = props.listPokemon;
                 fetchPokemonData(pokemon).then( pokeData =>{
                     listPoke.push(pokeData);
-                    props.listPokemonAction(listPoke)
-                    //  setListPokemon(pokeList);
+                    props.listPokemonAction(listPoke);
+                    if(listPoke.length <= 20){
+                        localStorage.setItem('listPokemon', JSON.stringify(listPoke))
+                    }
                 })
+                
             })
         })
     }
 
     useEffect( () => {
-        getData()
+        let validateStorage = localStorage.getItem('listPokemon');
+        if(validateStorage == null  ){
+            getData()
+        }else{
+            const nexPage = localStorage.getItem('nextPage');
+            const listPokemonStorage = JSON.parse(validateStorage);
+            props.listPokemonAction(listPokemonStorage);
+            setNext(nexPage);
+        }
+       
     }, [] );
 
     function selectPokemon(e){
-        setShowModal(true)
         props.selecPokemonAction(e)
     }
-    
+    function hableClose(){
+        props.selecPokemonAction({});
+    }
+    function nextPage(){
+        getData(next)
+    }
+
     return (
         <>
-            {props.listPokemon.length >= 1 ?
-                props.listPokemon.map( i => {
+            { 
+                props.filterPokemon.length == 0 ? 
+                    props.listPokemon.map( i => {
+                        return(
+                            <div key={i.id}>
+                                <Card 
+                                    name={i.name} 
+                                    id={i.id}
+                                    images={i.sprites}
+                                    type={i.types}
+                                    onChange={ () => selectPokemon(i) }
+                                />
+                            </div>
+                        )
+                    })
+                : props.filterPokemon.map( i => {
                     return(
-                       
-                        <Card 
-                            key={i.id}
-                            name={i.name} 
-                            id={i.id}
-                            images={i.sprites}
-                            type={i.types}
-                            onChange={ () => selectPokemon(i) }
-                        />
+                        <div key={i.id}>
+                            <Card 
+                                name={i.name} 
+                                id={i.id}
+                                images={i.sprites}
+                                type={i.types}
+                                onChange={ () => selectPokemon(i) }
+                            />
+                        </div>
                     )
                 })
-            :<p>Cargando...</p> }
+            }
             {
-                showModal ?
+                Object.keys(props.selectPokemon).length >= 1  ?
                     <ModalPokemon 
-                        close={ () => setShowModal(false) }
+                        close={ hableClose }
                     />  
                 : null
             }
-           
+            <div className="moreContend">
+                <button onClick={ nextPage }>Load More</button>
+            </div>
+          
         </>
     )
     

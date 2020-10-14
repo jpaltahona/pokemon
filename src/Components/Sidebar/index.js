@@ -1,5 +1,4 @@
 import React from 'react'
-import FilterComponen from './FilterComponent';
 import TypesPokemon from './typesPokemon';
 import { FaFilter } from "react-icons/fa";
 export default function Sidebar() {

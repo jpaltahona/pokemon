@@ -3,7 +3,28 @@ import { connect } from 'react-redux';
 
 function ModalPokemon(props){
     const  { name, id , weight, height, types, species} = props.selectPokemon;
-    console.log(props);
+    const [infoPoke, setInfoPoke] = useState(null);
+
+    function getInfoPokemon(){
+        fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`)
+        .then(data => data.json())
+        .then(data => {
+            console.log(data);
+            setInfoPoke(data);
+        })
+    }
+    function evolutionData(){
+        fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}`)
+        .then(data => data.json())
+        .then(data => {
+            console.log(data);
+        })
+    }
+    useEffect( () => {
+        getInfoPokemon();
+    }, [] )
+   
+
     return(
         <div className="modal">
             <div className="modal__container">
@@ -12,7 +33,7 @@ function ModalPokemon(props){
                     <button onClick={ props.close } >x</button>
                 </div>
                 <div  className="modal__container__body">
-                    <div className="bodyInfo">
+                    <div className={"bodyInfo " + types[0].type.name}>
                         <div className="imgConten">
                             <img src={`https://pokeres.bastionbot.org/images/pokemon/${id}.png`}/>
                         </div>
@@ -39,11 +60,11 @@ function ModalPokemon(props){
                                 </tr>
                                 <tr>
                                     <td>Habitat</td>
-                                    <td>..</td>
+                                    <td>{ infoPoke ? infoPoke.habitat.name : 'cargando...' }</td>
                                 </tr>
                                 <tr>
                                     <td>color</td>
-                                    <td>..</td>
+                                    <td>{ infoPoke ? infoPoke.color.name : 'cargando...' }</td>
                                 </tr>
                                 
                             </table>

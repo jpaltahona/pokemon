@@ -10,14 +10,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000000;
+    background-color: #f9515c;
     position: fixed;
     top: 0px;
     left: 0px;
-
+    z-index: 10;
     .search-container{
         margin-right: 12em;
         position: relative;
+
         input{
             width: 300px;
             padding: 8px;
@@ -99,7 +100,7 @@
 .conten-layout{
     display: inline-block;
     width: 100%;
-    padding-top: 5em;
+    padding-top: 4.3em;
     height: 100vh;
     .sidebar{
         width: 20%;
@@ -197,6 +198,7 @@
     justify-content: center;
     align-items: center;
     display: flex;
+    z-index: 100;
 
     &__container{
         width: 80%;
@@ -229,12 +231,19 @@
 
                     img{
                         height: 100%;
+                        background-color: #ffffff38;
+                        border-radius: 500px;
+                        box-sizing: border-box;
+                        padding: 2em;
                     }
                 }
                 .infoPokemon{
                     width: 50%;
                     padding-top: 2em;
-
+                    background-color: #fff;
+                    padding: 1em;
+                    box-sizing: border-box;
+                    
                     table {
                         font-family: arial, sans-serif;
                         border-collapse: collapse;
@@ -255,6 +264,63 @@
         }
     }
 }
+.listResults{
+    position: absolute;
+    
+    width: 300px;
+    background-color: #fff;
+    right: 0px;
+    padding: 10px;
+    border-radius: 10px;
+    top: 2.5em;
+    box-shadow: 1px 6px 20px 0px #0404045e;
+
+    li{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        display: flex;
+        justify-content: space-around;
+        .infoPoke{
+            width: 142px;
+            ul{
+                list-style-type: none;
+
+                li{
+                    padding: 0px;
+                    border-radius: 50px;
+                    margin: 5px 0px;
+                    color: #fff;
+                    text-align: left;
+                    display: block;
+                    padding: 1px 14px;
+                }
+            }
+        }
+        .photoContent{
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+        }
+        
+    }
+}
+.moreContend{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+
+    button{
+        width: 20%;
+        border: none;
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: black;
+        color: #fff;
+        border-radius: 10px;
+    }
+}
+//mobile
 @media (min-width: 200px) and (max-width: 610px) {
     .header .search-container{
         margin-right: 0;
@@ -359,4 +425,7 @@
             } 
         }
     }
+    .moreContend button{
+        width: 43%;
+    }  
 }

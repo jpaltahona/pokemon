@@ -3,6 +3,6 @@ export async function searchPokemon(name) {
         fetch(`https://pokeapi.co/api/v2/pokemon/${name}`)
         .then(response => response.json())
         .then( data => resolve(data) )
-        .catch( error => reject(null))
+        .catch( error => resolve(null))
     } )
 };

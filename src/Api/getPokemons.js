@@ -9,10 +9,10 @@ export function fetchPokemonData(pokemon){
     })
 };
 
-export async function getPokemons() {
+export async function getPokemons(api) {
 
     return new Promise( ( resolve, reject ) => {
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=20')
+        fetch(`${ api ? api : 'https://pokeapi.co/api/v2/pokemon?limit=20'}`)
         .then(response => response.json())
         .then( data => resolve(data) )
         .catch( error => reject(null))
