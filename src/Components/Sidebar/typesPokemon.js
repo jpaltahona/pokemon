@@ -20,7 +20,6 @@ function TypesPokemon(props) {
     function hanbleChange(e){
         let arraySelection = selection;
         const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-        console.log(value)
         
         if(value == true){
             arraySelection.push(e.target.value);

@@ -42,7 +42,6 @@ function Search(props){
         setShowList(false);
     }
     function searchHable(e){
-        console.log(e);
         let arrayPokemonSearch = [];
         if( e != "" ){
             if(props.filterPokemon.length >= 1 ){
@@ -58,7 +57,7 @@ function Search(props){
                         props.filterPokemonAction(arrayPokemonSearch);
                     }
                 });
-                console.log(arrayPokemonSearch);
+
             }else{
                 props.listPokemon.forEach(element => {
                     let arraySpli = element.name.split(e);
@@ -71,7 +70,7 @@ function Search(props){
                         props.filterPokemonAction(arrayPokemonSearch);
                     }
                 });
-                console.log(arrayPokemonSearch);
+ 
             }
         }else{
             props.filterPokemonAction([])

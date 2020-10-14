@@ -8,9 +8,3 @@ export function typePokemonsApi(api) {
         .catch(err => reject(null))
     } )
 }
-
-export function selecTypesPokemon(list){
-    list.map( i => {
-        console.log(i)
-    } );
-}
