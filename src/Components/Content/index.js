@@ -31,7 +31,7 @@ function Content(props) {
 
     useEffect( () => {
         let validateStorage = localStorage.getItem('listPokemon');
-        if(validateStorage == null  ){
+        if(validateStorage === null  ){
             getData()
         }else{
             const nexPage = localStorage.getItem('nextPage');
@@ -55,7 +55,7 @@ function Content(props) {
     return (
         <>
             { 
-                props.filterPokemon.length == 0 ? 
+                props.filterPokemon.length === 0 ? 
                     props.listPokemon.map( i => {
                         return(
                             <div key={i.id}>

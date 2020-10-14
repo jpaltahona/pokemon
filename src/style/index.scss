@@ -109,7 +109,7 @@
         float: left;
         padding: 1em;
         box-sizing: border-box;
-        box-shadow: 2px 7px 14px -7px #00000073;
+        box-shadow: 7px -6px 13px -9px #00000073;
         overflow: auto;
     }
     .conten-info{
@@ -129,6 +129,19 @@
         float: left;
         width: 50%;
         height: 36px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        label{
+            font-weight: 400;
+            color: #585858;
+        }
+        input{
+            margin-right: 5px;
+            position: relative;
+            top: 2px;
+        }
     }
 }
 .card{
@@ -339,6 +352,14 @@
             left: 0px;
             z-index: 1;
             display: none;
+
+            h4{
+                font-size: 19px;
+                color: #7b7b7b;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border-bottom: solid 1px;
+            }
         }
         .conten-info{
             width: 100%;

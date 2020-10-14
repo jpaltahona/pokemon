@@ -43,12 +43,12 @@ function Search(props){
     }
     function searchHable(e){
         let arrayPokemonSearch = [];
-        if( e != "" ){
+        if( e !== "" ){
             if(props.filterPokemon.length >= 1 ){
 
                 props.filterPokemon.forEach(element => {
                     let arraySpli = element.name.split(e);
-                    if( element.name == e ){
+                    if( element.name === e ){
                         arrayPokemonSearch.push(element);
                         props.filterPokemonAction(arrayPokemonSearch);
                         
@@ -61,7 +61,7 @@ function Search(props){
             }else{
                 props.listPokemon.forEach(element => {
                     let arraySpli = element.name.split(e);
-                    if( element.name == e ){
+                    if( element.name === e ){
                         arrayPokemonSearch.push(element);
                         props.filterPokemonAction(arrayPokemonSearch);
                         
